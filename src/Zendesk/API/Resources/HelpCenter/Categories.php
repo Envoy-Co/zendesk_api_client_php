@@ -3,6 +3,8 @@
 namespace Zendesk\API\Resources\HelpCenter;
 
 use Zendesk\API\Traits\Resource\Defaults;
+use Zendesk\API\Traits\Utility\ChainedParametersTrait;
+use Zendesk\API\Traits\Utility\InstantiatorTrait;
 
 /**
  * Class Categories
@@ -10,6 +12,7 @@ use Zendesk\API\Traits\Resource\Defaults;
  */
 class Categories extends ResourceAbstract
 {
+    use InstantiatorTrait;
     use Defaults;
 
     /**
@@ -95,4 +98,15 @@ class Categories extends ResourceAbstract
             ['category_locale' => $sourceLocale]
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getValidSubResources()
+    {
+        return [
+            'sections'            => Sections::class,
+        ];
+    }
+
 }
